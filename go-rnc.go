@@ -1,4 +1,4 @@
-package main
+package go_rnc
 
 import (
 	"fmt"
@@ -23,7 +23,4 @@ func getRemoteConfig(paramName string) (string, error) {
 	default:
 		return "", fmt.Errorf("getRemoteConfig: Method %s is not supported", paramStoreType)
 	}
-}
-
-func main() {
 }
