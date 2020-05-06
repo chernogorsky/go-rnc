@@ -11,7 +11,7 @@ const defEnvParamStoreType string = "env"
 func getRemoteConfigEnv(paramName string) (string, error) {
 	return os.Getenv(paramName), nil
 }
-func getRemoteConfig(paramName string) (string, error) {
+func GetRemoteConfig(paramName string) (string, error) {
 	paramStoreType := os.Getenv(envParamStoreType)
 	if paramStoreType == "" {
 		paramStoreType = defEnvParamStoreType
@@ -21,6 +21,6 @@ func getRemoteConfig(paramName string) (string, error) {
 	case "env":
 		return getRemoteConfigEnv(paramName)
 	default:
-		return "", fmt.Errorf("getRemoteConfig: Method %s is not supported", paramStoreType)
+		return "", fmt.Errorf("GetRemoteConfig: Method %s is not supported", paramStoreType)
 	}
 }
