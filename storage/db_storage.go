@@ -19,7 +19,7 @@ type StorageDB struct {
 
 }
 
-func getSqlStorage() (*StorageDB, error) {
+func GetSqlStorage() (*StorageDB, error) {
 	dbHost,_ := rncConfig.GetRemoteConfig("DB_HOST")
 	dbName,_ := rncConfig.GetRemoteConfig("DB_NAME")
 	dbUser,_ := rncConfig.GetRemoteConfig("DB_USER")
