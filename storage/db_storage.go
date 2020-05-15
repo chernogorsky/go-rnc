@@ -3,12 +3,13 @@ package storage
 import (
 	"database/sql"
 	"fmt"
+	rncConfig "github.com/chernogorsky/rnc/config"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
 )
 
 
-func (db *sql.DB) Open() (*sql.DB, error) {
+func (db *sql.DB) OpenStorage() (*sql.DB, error) {
 	dbHost,_ := rncConfig.GetRemoteConfig("DB_HOST")
 	dbName,_ := rncConfig.GetRemoteConfig("DB_NAME")
 	dbUser,_ := rncConfig.GetRemoteConfig("DB_USER")
