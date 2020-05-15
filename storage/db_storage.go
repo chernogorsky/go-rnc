@@ -8,7 +8,9 @@ import (
 	//"log"
 )
 
-type StorageDB sql.DB
+type StorageDB struct {
+	*sql.DB
+}
 
 func (db *StorageDB) OpenStorage() (*StorageDB, error) {
 	//dbHost,_ := rncConfig.GetRemoteConfig("DB_HOST")
