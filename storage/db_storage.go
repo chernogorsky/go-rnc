@@ -34,14 +34,18 @@ func GetSqlStorage() (*StorageDB, error) {
 	return &StorageDB{db, "mysql", dbHost, dbName}, nil
 }
 
-func (db *StorageDB) OpenStorage() (*StorageDB, error) {
+func (db *StorageDB) OpenStorage() error {
 
 	log.Info("Connecting to " + db.dbHost)
 	err := db.Ping()
 	if err != nil {
 		log.Error("DB Ping error for host " + db.dbHost)
-		return nil,err
+		return err
 	}
 
-	return db, nil
+	return nil
+}
+
+func (db *StorageDB) Close() {
+	db.Close()
 }
