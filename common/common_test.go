@@ -1,4 +1,4 @@
-package rnc
+package common
 
 import (
 	"os"
