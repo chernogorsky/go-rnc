@@ -5,7 +5,7 @@ import (
 	//"fmt"
 	//rncConfig "github.com/chernogorsky/rnc/config"
 	_ "github.com/go-sql-driver/mysql"
-	//"log"
+	log "github.com/sirupsen/logrus"
 )
 
 type StorageDB struct {
@@ -29,6 +29,7 @@ func (db *StorageDB) OpenStorage() (*StorageDB, error) {
 	//log.Info("Connecting to " + dbHost)
 	err := db.Ping()
 	if err != nil {
+		log.Error("DB Ping error")
 		return nil,err
 	}
 
