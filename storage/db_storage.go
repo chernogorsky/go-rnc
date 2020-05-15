@@ -5,7 +5,7 @@ import (
 	//"fmt"
 	//rncConfig "github.com/chernogorsky/rnc/config"
 	_ "github.com/go-sql-driver/mysql"
-	"log"
+	//"log"
 )
 
 type StorageDB sql.DB
