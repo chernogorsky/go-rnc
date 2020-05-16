@@ -105,7 +105,7 @@ func (db *SDB) GetDevices() ([] Device, error){
 	log.Info("GetDevices. Scan rows")
 	for rows.Next() {
 		rawDev := Device{}
-		err := rows.Scan(&rawDev.id, &rawDev.name)
+		err := rows.Scan(&rawDev.Id, &rawDev.Name)
 		if err != nil {
 			log.Error(fmt.Sprintf("GetDevices. Error during scanning the rows. %s", err.Error()))
 			return nil, err

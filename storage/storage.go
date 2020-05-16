@@ -1,8 +1,8 @@
 package storage
 
 type Device struct {
-	id int
-	name string
+	Id int
+	Name string
 }
 
 type storage interface {
