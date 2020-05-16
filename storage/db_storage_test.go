@@ -1,9 +1,9 @@
 package storage
 
 import (
+	sqlM "database/sql"
 	"errors"
 	"github.com/stretchr/testify/assert"
-	sqlM "database/sql"
 	"testing"
 )
 
@@ -18,6 +18,9 @@ func (sqlDBIntMock) Close() error {
 	return sqlDBIntMockCloseError
 }
 
+func (sqlDBIntMock) Query(query string, args ...interface{}) (*sqlRows, error){
+	return nil, nil
+}
 
 type rncConfigIntMock struct {}
 func (rncConfigIntMock) GetRemoteConfig(s string) (string, error) {

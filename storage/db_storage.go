@@ -11,11 +11,12 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-//type sqlDB = sqlModule.DB
+type sqlRows = sqlModule.Rows
 
 type sqlDBInt interface {
 	Ping() error
 	Close() error
+	Query(query string, args ...interface{}) (*sqlRows, error)
 }
 
 
@@ -89,4 +90,35 @@ func (db *SDB) OpenStorage() error {
 
 func (db *SDB) Close() error {
 	return db.sqlDBInt.Close()
+}
+
+func (db *SDB) GetDevices() ([] Device, error){
+	var result [] Device
+
+	log.Info("GetDevices. query DB")
+	rows, err := db.Query("select deviceId, name from devices")
+	if err != nil {
+		log.Error(fmt.Sprintf("GetDevices. Error during the query %s", err.Error()))
+		return nil, err
+	}
+	defer rows.Close()
+	log.Info("GetDevices. Scan rows")
+	for rows.Next() {
+		rawDev := Device{}
+		err := rows.Scan(&rawDev.id, &rawDev.name)
+		if err != nil {
+			log.Error(fmt.Sprintf("GetDevices. Error during scanning the rows. %s", err.Error()))
+			return nil, err
+		}
+		result = append(result, rawDev)
+
+	}
+	err = rows.Err()
+	if err != nil {
+		log.Error(fmt.Sprintf("GetDevices. Error during the last rows scan %s", err.Error()))
+		return nil, err
+	}
+
+	log.Info(fmt.Sprintf("GetDevices. result len: %d", len(result)))
+	return result, nil
 }
