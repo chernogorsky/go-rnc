@@ -13,12 +13,23 @@ import (
 
 type sqlRows = sqlModule.Rows
 
+type sqlRowsInt interface {
+	Close() error
+	Next() bool
+	Scan(dest ...interface{}) error
+	Err() error
+}
+
+//type sqlRows struct {
+//	sqlModule.Rows
+//}
+
+
 type sqlDBInt interface {
 	Ping() error
 	Close() error
-	Query(query string, args ...interface{}) (*sqlRows, error)
+	Query(query string, args ...interface{}) (*sqlModule.Rows, error)
 }
-
 
 
 type sqlInt interface {
@@ -87,6 +98,11 @@ func (db *SDB) OpenStorage() error {
 
 	return nil
 }
+
+func (db *SDB) Query(query string, args ...interface{}) (*sqlModule.Rows, error) {
+	return db.sqlDBInt.Query(query, args)
+}
+
 
 func (db *SDB) Close() error {
 	return db.sqlDBInt.Close()

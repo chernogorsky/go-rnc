@@ -18,7 +18,24 @@ func (sqlDBIntMock) Close() error {
 	return sqlDBIntMockCloseError
 }
 
-func (sqlDBIntMock) Query(query string, args ...interface{}) (*sqlRows, error){
+type sqlRowsIntMock struct {
+	//*sqlM.Rows
+}
+//func (sqlRowsIntMock) Close() error {
+//	return nil
+//}
+//func (sqlRowsIntMock) Next() bool {
+//	return false
+//}
+//func (sqlRowsIntMock) Scan(dest ...interface{}) error {
+//	return nil
+//}
+//func (sqlRowsIntMock) Err() error {
+//	return nil
+//}
+
+func (sqlDBIntMock) Query(query string, args ...interface{}) (*sqlM.Rows, error){
+	//raws := sqlRowsIntMock{}
 	return nil, nil
 }
 
